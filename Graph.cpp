@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -35,17 +37,78 @@ class Graph{
           cout<<'\n';
         }
     }
+
+    //BFS에서는 queue가 필요!
+    void BFSGraph(int startV){
+        bool isVisit[numV]; //false로 초기화
+        queue<int> q;
+
+        isVisit[startV] = true;
+        q.push(startV);
+        cout<<startV<<" ";
+
+        while(!q.empty()){
+            int cur = q.front();
+            q.pop();
+            for(auto l : adjList[cur]){
+              // cout<<"---"<<l<<'\n';
+              if(isVisit[l] == false){
+                //action
+                cout<<" "<<l<<"  ";
+                isVisit[l] = true;
+                q.push(l);
+              }
+            }
+        }
+    }
+
+        //DFS에서는 stack이 필요!
+    void DFSGraph(int startV){
+        bool isVisit[numV]; //false로 초기화
+        fill(isVisit+1, isVisit+numV, 0);
+        stack<int> s;
+
+        isVisit[startV] = true;
+        s.push(startV);
+        // cout<<startV<<" ";
+
+        while(!s.empty()){
+            int cur = s.top();
+            s.pop();
+            cout<<" "<<cur<<" ";     //action
+            // cout<<"";
+            for(auto l : adjList[cur]){
+              if(isVisit[l] == false){
+                isVisit[l] = true;
+                s.push(l);
+              }
+            }
+        }
+    }
 };
+
 
 int main() {
 
-  Graph* testGraph = new Graph(5);
+  Graph* testGraph = new Graph(7);
 
   testGraph->AddEdge(0, 1);
-  testGraph->AddEdge(4, 1);
-  testGraph->AddEdge(1, 3);
+  testGraph->AddEdge(0, 3);
+  testGraph->AddEdge(1, 2);
+
+  testGraph->AddEdge(3, 2);
+  testGraph->AddEdge(3, 4);
+  testGraph->AddEdge(4, 5);
+  testGraph->AddEdge(4, 6);
 
   testGraph->ShowGraph();
+
+  cout<<"BFS"<<'\n';
+  testGraph->BFSGraph(6);
+
+  cout<<'\n'<<"DFS"<<'\n';
+  testGraph->DFSGraph(6);
+  cout<<'\n'<<"end";
 
 }
 
