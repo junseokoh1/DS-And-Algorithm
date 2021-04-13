@@ -121,3 +121,16 @@ int main() {
     vector<int> vec2(vec);  // vec 을 복사하여 벡터 생성
 
 */
+
+
+/*
+
+class로 만들어서 간선의 BFS, DFS를 보기좋게 만든 것 뿐!!!
+
+결국 실제가 되는 부분은     vector<int>* adjList; !
+
+즉 코딩 테스트에서 처럼 간단하게 하려면 vector만 있으면 됨!!
+
+그리고     vector<int>* adjList; 가 핵심이자 그래프 자체임!!!
+
+*/
